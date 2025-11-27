@@ -42,24 +42,26 @@
             margin-bottom: 1.5rem;
         }
         .app-store-btn {
-            display: inline-flex;
-            align-items: center;
+            display: flex;
+            height: 56px;
+            padding: 16px;
             justify-content: center;
-            gap: 0.5rem;
-            background-color: #000;
-            color: #fff;
-            padding: 0.875rem 1.5rem;
-            border-radius: 12px;
+            align-items: center;
+            gap: 8px;
+            align-self: stretch;
+            border-radius: 16px;
+            border: 1px solid var(--surface-dark, #14213D);
+            background: var(--service-info, #98C1D9);
+            box-shadow: 3px 3px 0 0 #14213D;
             text-decoration: none;
+            color: var(--surface-dark, #14213D);
+            font-family: var(--Font-Family-App, "IBM Plex Sans");
             font-size: 1rem;
             font-weight: 500;
-            transition: background-color 0.2s ease;
-        }
-        .app-store-btn:hover {
-            background-color: #333;
         }
         .app-store-btn:active {
-            background-color: #555;
+            box-shadow: 1px 1px 0 0 #14213D;
+            transform: translate(2px, 2px);
         }
         .apple-icon {
             width: 20px;
