@@ -10,7 +10,7 @@
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Get Rozum</title>
+    <title>Get Rozum app</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -115,7 +115,7 @@
         <div id="lottie-animation"></div>
         <div class="content">
             <p class="redirect-text">You're being redirected to the App Store</p>
-            <a href="#" class="app-store-btn">
+            <a href="#" id="app-store-btn" class="app-store-btn">
                 <img src="images/highlight-left.svg" alt="" class="highlight-left">
                 <img src="images/highlight-right.svg" alt="" class="highlight-right">
                 <img src="images/apple.svg" alt="" class="apple-icon">
@@ -132,6 +132,34 @@
             autoplay: true,
             path: 'animations/main.json'
         });
+
+        // AppsFlyer Smart Script redirect
+        var appStoreBtn = document.getElementById('app-store-btn');
+        var fallbackUrl = 'https://apps.apple.com/app/id6739432935';
+
+        function checkAndRedirect() {
+            var url = window.AF_SMART_SCRIPT_RESULT?.clickURL || fallbackUrl;
+            appStoreBtn.href = url;
+
+            setTimeout(function() {
+                window.location.href = url;
+            }, 3000);
+        }
+
+        // Wait for GTM/AppsFlyer to load, then check result
+        if (window.AF_SMART_SCRIPT_RESULT) {
+            checkAndRedirect();
+        } else {
+            // Poll for result (GTM loads async)
+            var attempts = 0;
+            var checkInterval = setInterval(function() {
+                attempts++;
+                if (window.AF_SMART_SCRIPT_RESULT || attempts > 20) {
+                    clearInterval(checkInterval);
+                    checkAndRedirect();
+                }
+            }, 100);
+        }
     </script>
 </body>
 </html>
