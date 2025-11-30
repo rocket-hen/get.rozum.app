@@ -140,6 +140,7 @@
         function checkAndRedirect() {
             var url = window.AF_SMART_SCRIPT_RESULT?.clickURL || fallbackUrl;
             appStoreBtn.href = url;
+            console.log('Redirect URL:', url);
 
             setTimeout(function() {
                 window.location.href = url;
